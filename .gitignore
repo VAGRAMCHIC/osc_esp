@@ -53,7 +53,7 @@ dkms.conf
 
 # debug information files
 *.dwo
-
+managed_components/
 build/
 sdkconfig
 sdkconfig.old
