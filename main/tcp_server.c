@@ -4,6 +4,7 @@
 #include "ads1115.h"
 #include "esp_log.h"
 #include "esp_timer.h"
+#include "http_server.h"
 #include "lwip/sockets.h"
 #include <string.h>
 
@@ -44,7 +45,8 @@ static void tcp_server_task(void *arg) {
 
         int64_t next_time = esp_timer_get_time();
         while (wifi_is_connected() && client_sock >= 0) {
-            float voltage = ads1115_read_voltage();
+            float voltage_raw = ads1115_read_voltage();
+            float voltage = voltage_raw * get_probe_multiplier();
             float timestamp = (float)(esp_timer_get_time() / 1000000.0);
 
             uint8_t buffer[8];

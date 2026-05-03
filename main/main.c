@@ -3,6 +3,7 @@
 #include "wifi.h"
 #include "ads1115.h"
 #include "tcp_server.h"
+#include "http_server.h"
 
 static const char *TAG = "MAIN";
 
@@ -14,6 +15,6 @@ void app_main(void) {
 
     float test_v = ads1115_read_voltage();
     ESP_LOGI(TAG, "Initial voltage: %.3f V", test_v);
-
+    http_server_start();
     tcp_server_start();
 }

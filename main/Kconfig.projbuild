@@ -1,0 +1,13 @@
+menu "Wi-Fi Configuration"
+    config WIFI_SSID
+        string "Wi-Fi SSID"
+        default "MikroTik-8E25DC"
+        help
+            SSID (name) of the Wi-Fi network to connect to.
+
+    config WIFI_PASSWORD
+        string "Wi-Fi Password"
+        default "qwertypoweroverus12"
+        help
+            Password for the Wi-Fi network.
+endmenu

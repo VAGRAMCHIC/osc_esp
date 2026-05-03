@@ -1,9 +1,6 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-// Wi-Fi
-#define WIFI_SSID     "MikroTik-8E25DC"
-#define WIFI_PASS     "qwertypoweroverus12"
 
 // TCP
 #define TCP_PORT      9999
