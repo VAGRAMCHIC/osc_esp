@@ -4,6 +4,7 @@
 #include "ads1115.h"
 #include "esp_log.h"
 #include "esp_timer.h"
+#include "usb_serial.h"
 #include "http_server.h"
 #include "lwip/sockets.h"
 #include <string.h>
@@ -21,7 +22,7 @@ static void tcp_server_task(void *arg) {
         .sin_family = AF_INET,
         .sin_port = htons(TCP_PORT),
         .sin_addr.s_addr = htonl(INADDR_ANY)
-    };
+    }
     bind(listen_sock, (struct sockaddr*)&addr, sizeof(addr));
     listen(listen_sock, 1);
     ESP_LOGI(TAG, "TCP server listening on port %d", TCP_PORT);
@@ -56,7 +57,7 @@ static void tcp_server_task(void *arg) {
             if (send(client_sock, buffer, 8, 0) < 0) {
                 break;
             }
-
+            usb_serial_send(buffer, 8);
             next_time += SAMPLE_INTERVAL_US;
             int64_t now = esp_timer_get_time();
             int64_t delay = next_time - now;
